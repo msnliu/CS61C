@@ -1,0 +1,3 @@
+alternative to valgrind
+
+-fsanitize=address

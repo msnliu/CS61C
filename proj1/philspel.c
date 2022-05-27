@@ -71,6 +71,12 @@ int main(int argc, char **argv) {
 unsigned int stringHash(void *s) {
   char *string = (char *)s;
   // -- TODO --
+  unsigned int sum = 0;
+  int c;
+  while (c = *string++) {
+    sum += 31 * sum + c;
+  }
+  return sum;
 }
 
 /*
@@ -81,6 +87,10 @@ int stringEquals(void *s1, void *s2) {
   char *string1 = (char *)s1;
   char *string2 = (char *)s2;
   // -- TODO --
+  if (strcmp(string1, string2) == 0) {
+    return 1;
+  }
+  return 0;
 }
 
 /*
@@ -101,6 +111,39 @@ int stringEquals(void *s1, void *s2) {
  */
 void readDictionary(char *dictName) {
   // -- TODO --
+  FILE *fptr;
+  fptr = fopen(dictName, "r");
+  if (fptr == NULL) {
+    fprintf(stderr, "%s file does NOT exist", dictName);
+    exit(1);
+  }
+
+  char *word = (char *)malloc(61 * sizeof(char));
+  char c;
+  int i = 0;
+  int length = 60;
+
+  while ((c = fgetc(fptr)) != EOF) {
+    if (c == '\n') {
+      char *key = (char *)malloc((i + 1) * sizeof(char));
+      memcpy(key, word, i);
+      key[i] = '\0';
+      if (findData(dictionary, key) == NULL) {
+          insertData(dictionary, key, key);
+      }
+      i = 0;
+      continue;
+    }
+
+    if (i == length) {
+      word = (char *)realloc(word, 2 * length + 1);
+    }
+
+    word[i] = c;
+    i += 1;
+  }
+  free(word);
+  fclose(fptr);
 }
 
 /*
@@ -126,4 +169,45 @@ void readDictionary(char *dictName) {
  */
 void processInput() {
   // -- TODO --
+  int length = 60;
+  char *str1 = (char *)malloc((length + 1) * sizeof(char));
+  char *str2 = (char *)malloc((length + 1) * sizeof(char));
+  char *str3 = (char *)malloc((length + 1) * sizeof(char));
+  int i = 0;
+  int c;
+
+  while ((c = fgetc(stdin)) != EOF) {
+    if (i == length) {
+      str1 = (char *)realloc(str1, (2 * length + 1) * sizeof(char));
+      str2 = (char *)realloc(str1, (2 * length + 1) * sizeof(char));
+      str3 = (char *)realloc(str1, (2 * length + 1) * sizeof(char));
+    }
+
+    if (isalpha(c) != 0) {
+      str1[i] = (char) c;
+      str2[i] = (char) tolower(c);
+      str3[i] = (i == 0) ? c : (char) tolower(c);
+      i += 1;
+    } else {
+        if (isalpha(str1[0])) {
+          str1[i] = '\0';
+          str2[i] = '\0';
+          str3[i] = '\0';
+          if (findData(dictionary, str1) == NULL && findData(dictionary, str2) == NULL && findData(dictionary, str3) == NULL) {
+            fprintf(stdout, "%s [sic]%c", str1, c);
+          } else {
+            fprintf(stdout, "%s%c", str1, c);
+          }
+          i = 0;
+          memset(str1, 0, strlen(str1));
+          memset(str2, 0, strlen(str2));
+          memset(str3, 0, strlen(str3));
+        } else {
+          fprintf(stdout, "%c", c);
+        }
+    }
+  }
+  free(str1);
+  free(str2);
+  free(str3);
 }

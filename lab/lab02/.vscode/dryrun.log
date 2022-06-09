@@ -1,0 +1,11 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/liuzongjun/Desktop/CS61C/lab/lab02'
+gcc -ggdb -Wall -std=c99    vector_test.c   -o vector_test
+gcc -c -ggdb -Wall -std=c99 bit_ops.c
+gcc -c -ggdb -Wall -std=c99 test_bit_ops.c
+gcc -ggdb -Wall -std=c99 -g -o bit_ops bit_ops.o test_bit_ops.o 
+gcc -c -ggdb -Wall -std=c99 lfsr.c
+gcc -c -ggdb -Wall -std=c99 test_lfsr.c
+gcc -ggdb -Wall -std=c99 -g -o lfsr lfsr.o test_lfsr.o 
+make: Leaving directory `/Users/liuzongjun/Desktop/CS61C/lab/lab02'
+ 

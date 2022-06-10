@@ -120,18 +120,39 @@ void vector_set(vector_t *v, size_t loc, int value) {
      */
 
     /* YOUR SOLUTION HERE */
-    if (loc > (v->size - 1)) {
-        int previous_size = v->size;
-        v->size = loc + 1;
-        v->data = realloc(v->data, v->size * sizeof(int));
-        if (v->data == NULL) {
-            vector_delete(v);
-            allocation_failed();
-        }
+    // if (loc > (v->size - 1)) {
+    //     int previous_size = v->size;
+    //     v->size = loc + 1;
+    //     v->data = realloc(v->data, v->size * sizeof(int));
+    //     if (v->data == NULL) {
+    //         vector_delete(v);
+    //         allocation_failed();
+    //     }
 
-        for (int i = previous_size; i < loc; i++) {
-            v->data[i] = 0;
-        }
-    }
+    //     for (int i = previous_size; i < loc; i++) {
+    //         v->data[i] = 0;
+    //     }
+    // }
+    // v->data[loc] = value;
+    if(loc > (v->size - 1)) {
+      int prevSize = v->size;
+      int newSize = loc + 1;
+      int *newData = malloc(sizeof(int) * newSize);
+      if(newData == NULL) {
+        allocation_failed();
+      }
+      int p = 0;
+      // 复制内容
+      for(; p < prevSize; p++) {
+          newData[p] = v->data[p];
+      }
+      for(; p < newSize; p++) {
+          newData[p] = 0;
+      }
+      free(v->data);
+      v->size = newSize;
+      v->data = newData;
+
+    }    
     v->data[loc] = value;
 }

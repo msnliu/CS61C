@@ -35,7 +35,7 @@ main:
 map:
     # Prologue: Make space on the stack and back-up registers
     ### YOUR CODE HERE ###
-    addi sp, sp, -23
+    addi sp, sp, -12
     sw ra, 0(sp)
     sw s0, 4(sp)
     sw s1, 8(sp)
@@ -57,7 +57,7 @@ map:
     # Call the function in question on that value. DO NOT use a label (be prepared to answer why).
     # What function? Recall the parameters of "map"
     ### YOUR CODE HERE ###
-    jalr x0, s1, 0
+    jalr ra, s1, 0
 
     # store the returned value back into the node
     # Where can you assume the returned value is?

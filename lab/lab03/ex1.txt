@@ -1,0 +1,4 @@
+1. static data
+2. 34 print the value in register x11
+3. 0x10000010
+4. modify x28 to 12

@@ -13,26 +13,30 @@
 # this function exits with error code 8.
 # ==============================================================================
 relu:
-    # Prologue
+    li t5, 1
+    blt a1, t5, exit_relu
 
-
-loop_start:
+    add t0, x0, x0 # current index / multiplier
+    addi t1, x0, 4 # multiplicant
     
-
-
-
-
-
-
+loop_start:
+    beq t0, a1, loop_end
+    mul t2, t0, t1
+    # missed the line below!
+    add t2, t2, a0
+    lw t3, 0(t2)
+    # relu decision boundary
+    bgt t3, x0, loop_continue
+    sub t3, t3, t3
+    sw t3, 0(t2)
 
 loop_continue:
-
-
+    addi t0, t0, 1
+    j loop_start
 
 loop_end:
-
-
-    # Epilogue
-
-    
 	ret
+
+exit_relu: 
+    li a1, 8
+    jal exit2

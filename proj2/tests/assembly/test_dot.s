@@ -15,20 +15,22 @@ main:
     la s1 vector1
 
     # Set vector attributes
-    
-
+    mv a0, s0
+    mv a1, s1
+    li a2, 9 # length
+    li a3, 1 # stride for vector0
+    li a4, 1 # stride for vector1
 
     # Call dot function
-    
-
+    jal ra, dot
 
     # Print integer result
-
-
+    mv a1 a0
+    jal ra print_int
 
     # Print newline
-
-
+    li a1 '\n'
+    jal ra print_char
 
     # Exit
     jal exit

@@ -12,18 +12,24 @@ d: .word 0 0 0 0 0 0 0 0 0 # allocate static space for output
 main:
     # Load addresses of input matrices (which are in static memory), and set their dimensions
     
-
-
+    la a0, m0  # (int*)  is the pointer to the start of m0 
+	li a1, 3   # (int)   is the # of rows (height) of m0
+	li a2, 3   # (int)   is the # of columns (width) of m0
+	la a3, m1  # (int*)  is the pointer to the start of m1
+ 	li a4, 3   # (int)   is the # of rows (height) of m1
+	li a5, 3   # (int)   is the # of columns (width) of m1
+	la a6, d   # (int*)  is the pointer to the the start of d
 
     # Call matrix multiply, m0 * m1
     
-
-
+    jal ra matmul
 
     # Print the output (use print_int_array in utils.s)
 
-
-
+    mv a0, a6
+    li, a1, 3
+    li, a2, 3
+    jal print_int_array
 
     # Exit the program
     jal exit

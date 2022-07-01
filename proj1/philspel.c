@@ -129,7 +129,7 @@ void readDictionary(char *dictName) {
       memcpy(key, word, i);
       key[i] = '\0';
       if (findData(dictionary, key) == NULL) {
-          insertData(dictionary, key, key);
+        insertData(dictionary, key, key);
       }
       i = 0;
       continue;

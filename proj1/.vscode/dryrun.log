@@ -1,6 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/liuzongjun/Desktop/CS61C/proj1'
 gcc -g -Wall -std=c99 -c philspel.c
- 
 gcc -g -Wall -std=c99 -c hashtable.c
 gcc -g -Wall -o philspel philspel.o hashtable.o
 make: Leaving directory `/Users/liuzongjun/Desktop/CS61C/proj1'

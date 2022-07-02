@@ -188,13 +188,11 @@ end TCL_Generic;
     <comp lib="8" loc="(408,169)" name="Text">
       <a name="text" val="PUT CIRCUITRY HERE"/>
     </comp>
-    <comp lib="4" loc="(340,180)" name="Register"/>
-    <comp lib="0" loc="(330,240)" name="Clock">
-      <a name="facing" val="north"/>
-    </comp>
     <comp lib="3" loc="(220,210)" name="Adder"/>
     <comp lib="0" loc="(140,220)" name="Constant">
       <a name="width" val="8"/>
     </comp>
+    <comp lib="4" loc="(340,180)" name="Register"/>
+    <comp lib="0" loc="(340,250)" name="Clock"/>
   </circuit>
 </project>
